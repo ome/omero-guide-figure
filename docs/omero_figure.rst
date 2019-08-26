@@ -50,16 +50,16 @@ you can use any multi-channel images.
 
 6.  Go to the *Labels* tab, select all Images and add a Scalebar: Click the *Show* button, choose a length of 2 μm, click the *Label* checkbox and adjust the size of the Label to 12.
 
-7.  Add labels: choose *Dataset Name* in the label input dropdown list, choose *color white* and *position=top-left* then click *Add*:
+7.  Add labels: choose *Dataset Name* in the label input dropdown list, choose *color white* and *position=top-left*.
 
-8.  In the right-hand panel, click the *Open with...* button and choose *OMERO.figure*:
-
-    .. image:: images/image1.png
+    .. image:: images/image3.png
        :scale: 75 %
+
+8.  Click *Add* to create the new label.
 
 9.  Select one image. In the *Labels* tab, click the *Edit* button for ROIs.
 
-10.  If the image has ROIs in OMERO, click *Load ROIs.*
+10. If the image has ROIs in OMERO, click *Load ROIs.*
 
 11.  Mouse over the list to show each ROI on the Image and click to add it to the Image.
 
@@ -112,35 +112,32 @@ you can use any multi-channel images.
 
 35.  Repeat for other rows of the figure. At this point we have created the figure in the screenshot above.
 
-    .. image:: images/image3.png
-       :scale: 75 %
-
 Saving and exporting figures
 ----------------------------
 
-1. Go to *File* > *Paper Setup…* and in the dialog that pops up choose *Pages: 2.* Click *OK*.
+#.  Go to *File* > *Paper Setup…* and in the dialog that pops up choose *Pages: 2.* Click *OK*.
 
-2. Finally return to the webclient, select ‘Big’ images from the **svs** Dataset, copy the link to them and paste it into the *Add Image* dialog in OMERO.figure.
+#.  Finally return to the webclient, select ‘Big’ images from the **svs** Dataset, copy the link to them and paste it into the *Add Image* dialog in OMERO.figure.
 
-3. Move the big images to the 2nd page.
+#.  Move the big images to the 2nd page.
 
-4. In the header, click on the *Save* button to save the Figure as “Figure 1”.
+#.  In the header, click on the *Save* button to save the Figure as “Figure 1”.
 
-5. The URL will update. You can bookmark this URL or share with collaborators to view your figure.
+#.  The URL will update. You can bookmark this URL or share with collaborators to view your figure.
 
-6. To open other saved files, go *File > Open…*
+#.  To open other saved files, go *File > Open…*
 
-7. We can view figures from our collaborators here and filter by name or Owner.
+#.  We can view figures from our collaborators here and filter by name or Owner.
 
-8. Choose a figure to Open. For example the **Aurora-B figure 2** from trainer-2.
+#.  Choose a figure to Open. For example the **Aurora-B figure 2** from trainer-2.
 
-9. Select a panel and click on the *Webclient* link in the *Info* tab to show the image in the webclient.
+#.  Select a panel and click on the *Webclient* link in the *Info* tab to show the image in the webclient.
 
-10.  Back in OMERO.figure, go to *File > Open...* to choose the “Figure 1” file saved above.
+#.  Back in OMERO.figure, go to *File > Open...* to choose the “Figure 1” file saved above.
 
-11.  Click on *Export PDF* to export it as PDF.
+#.  Click on *Export PDF* to export it as PDF.
 
-12.  Download the PDF and open it. If opened in a suitable application e.g. Illustrator, the elements on the page will still be editable.
+#.  Download the PDF and open it. If opened in a suitable application e.g. Illustrator, the elements on the page will still be editable.
 
 
 .. |image2| image:: images/image2.png

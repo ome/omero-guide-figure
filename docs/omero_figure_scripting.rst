@@ -6,12 +6,12 @@ OMERO.figure scripting
 
 We can use JavaScript in the browser console to script changes to a
 figure. This is an experimental feature and not documented.
+In this example, we will automatically add labels based on analysis results.
 
 **Setup:**
 ----------
 
--  Install the OMERO.figure web app as described at
-      https://pypi.org/project/omero-figure/
+-  Install the OMERO.figure web app as described at https://pypi.org/project/omero-figure/
 
 **Resources:**
 
@@ -20,42 +20,67 @@ figure. This is an experimental feature and not documented.
 **Step-by-Step:**
 -----------------
 
-To see the
-data model for the current file, go to *File > Export as JSON...*.
+We will use the images listed above to create a FRAP figure but you can use any time-lapse images.
 
-The figureModel variable is accessible in the console. We can use AJAX
-to load JSON data. In this example we will load the FRAP intensities
-from the Map Annotations on these images.
+    .. image:: images/script_frap_figure.png
+       :scale: 75 %
+       :align: center
 
-1.  Select 2 FRAP images. If these images have a 
+#.  To see the data model for any current file in OMERO.figure, go to *File > Export as JSON...*.
 
-Create a Figure with 2 images from the *FRAP* Dataset.
+#.  You will see that the ``panels`` list defines the panels and each panel has attributes. For example, a panel with a single white label might include the following attributes:
 
-2.  Make each image into a row of multiple time-points.
+    ::
 
-3.  Open the browser console by *right-click > Inspect Element (Firefox)* or *right-click > Inspect (Chrome)* and click on the *Console* tab.
+        "name": "image1.tiff",
+        "labels":[{"text":"label text","size":12,"position":"topleft","color":"FFFFFF"}],
+        "x": 200, "y", 200, "width": 100, "height": 100,
+        ...many other attributes not shown...
 
-4.  Copy the code from
-       https://raw.githubusercontent.com/ome/training-scripts/v0.6.0/practical/javascript/figure_frap_mapannotation_label.js
+#.  The ``figureModel`` variable is accessible in the console. We can use ``figureModel.getSelected()`` to get selected panels and for each panel we can call ``p.set()`` to change an attribute.
 
-5.  Drag to select the FRAP movie images in the figure.
+#.  For example, to set the ``height`` of each selected panel to ``200``, we can do:
 
-6.  Paste the code into the console. **Do not hit enter yet.**
+    ::
 
-7.  Inspect the code. It will iterate through each of the **selected**
-       panels, an AJAX call is made to load the map annotations with the
-       namespace that we created from FRAP values above.
+        figureModel.getSelected().forEach(function(p){
+            p.set('height', 200)
+        });
 
-8.  The FRAP values are a list of [key, value] pairs and we can get the
-       value for the current T index of the panel values[theT][1] and
-       use this to create a label.
+#.  We can use AJAX to load JSON data and we will use ``p.add_labels()`` to create labels.
 
-9.  Edit the ‘position’ of the label to ‘bottomleft’ (can change size
-       and color too if desired) and hit Enter to run the code on
-       selected panels.
+#.  In this example we will load the FRAP intensities from the Map Annotations on these images.
 
-10. The labels should be added. Note that you can undo and redo these
-       changes in the UI as normal.
+#.  Select 2 FRAP images that have previously been analysed to create a ``Map Annotation`` with the namespace ``demo.simple_frap_data``.
 
-11. Try out other examples in
-       https://github.com/ome/training-scripts/tree/v0.6.0/practical/javascript
+    .. image:: images/script_map_ann_analysis.png
+       :scale: 75 %
+
+#.  Alternatively, you can add your own ``Map Annotation`` with each *Key* being a *T-index* (start at 0), and the *Value* will be a FRAP intensity (number).
+
+    .. image:: images/script_map_ann_manual.png
+       :scale: 75 %
+
+#.  Create a Figure with 2 images.
+
+#.  Copy and paste each image several times and increment T-index in the Preview panel to show multiple time-points per image.
+
+#.  Open the browser console by *right-click > Inspect Element (Firefox)* or *right-click > Inspect (Chrome)* and click on the *Console* tab.
+
+#.  Copy the code from https://raw.githubusercontent.com/ome/training-scripts/v0.6.0/practical/javascript/figure_frap_mapannotation_label.js
+
+#.  Drag to select the FRAP movie images in the figure.
+
+#.  Paste the code into the console. **Do not hit enter yet.**
+
+#.  Inspect the code. It will iterate through each of the **selected** panels, an AJAX call is made to load the Map Annotations with the namespace that we created from FRAP values above.
+
+#.  NB: If you manually created your own Map Annotation above, you can remove the line ``url += '&ns=' + ns;`` to avoid filtering by namespace.
+
+#.  The FRAP values are a list of ``[key, value]`` pairs and we can get the value for the current T index of the panel with ``values[theT][1]`` and use this to create a label.
+
+#.  Hit Enter to run the code on selected panels.
+
+#.  The labels should be added. Note that you can undo and redo these changes in the UI as normal.
+
+#.  Try out other examples in https://github.com/ome/training-scripts/tree/v0.6.0/practical/javascript
