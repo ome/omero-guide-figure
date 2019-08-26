@@ -1,10 +1,10 @@
-Welcome to guide template's documentation!
-==========================================
+OMERO.figure
+============
 
 Contents:
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    omero_figure
    omero_figure_scripting
