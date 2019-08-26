@@ -10,21 +10,18 @@ OMERO. Image metadata can be used to facilitate figure creation.
 **Setup:**
 ----------
 
--  Install the OMERO.figure web app as described at
-      https://pypi.org/project/omero-figure/
+-  Install the OMERO.figure web app as described at https://pypi.org/project/omero-figure/
 
 **Resources:**
+--------------
 
--  Sample images from the Image Data Resource (IDR)
-      https://idr.openmicroscopy.org/webclient/?show=project-51. See
-      https://github.com/ome/training-scripts/blob/master/maintenance/preparation/idr0021-data-prep.md
-      for download and import instructions.
+-  Sample images from the Image Data Resource (IDR) https://idr.openmicroscopy.org/webclient/?show=project-51.
+   See https://github.com/ome/training-scripts/blob/master/maintenance/preparation/idr0021-data-prep.md
+   for download and import instructions.
 
--  DV images from
-      https://downloads.openmicroscopy.org/images/DV/siRNAi-HeLa/
+-  DV images from https://downloads.openmicroscopy.org/images/DV/siRNAi-HeLa/
 
--  SVS ‘big’ pathology images from
-      https://downloads.openmicroscopy.org/images/SVS/
+-  SVS ‘big’ pathology images from https://downloads.openmicroscopy.org/images/SVS/
 
 **Step-by-Step:**
 -----------------

@@ -14,6 +14,7 @@ In this example, we will automatically add labels based on analysis results.
 -  Install the OMERO.figure web app as described at https://pypi.org/project/omero-figure/
 
 **Resources:**
+--------------
 
 -  2 FRAP images from https://downloads.openmicroscopy.org/images/DV/will/FRAP/
 
