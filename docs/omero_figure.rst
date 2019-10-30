@@ -54,6 +54,13 @@ you can use any multi-channel images.
 
 #.  Click *Add* to create the new label.
 
+#.  Add labels: choose *Key-Value Pairs* in the label input dropdown list, and in the following popup choose the Key which you want to add the value of from the dropdown menu.
+
+    .. image:: images/image3a.png
+       :scale: 75 %
+
+#.  Click *OK* in that dialog to create the new label.
+
 #.  Select one image. In the *Labels* tab, click the *Edit* button for ROIs.
 
 #. If the image has ROIs in OMERO, click *Load ROIs.*
