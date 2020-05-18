@@ -1,11 +1,20 @@
 Create figures using OMERO.figure
 =================================
 
+OMERO.figure is a web-based tool for creating figures from Images in
+OMERO. Image metadata can be used to facilitate figure creation.
+
 **Description:**
 ----------------
 
-OMERO.figure is a web-based tool for creating figures from Images in
-OMERO. Image metadata can be used to facilitate figure creation.
+This guide covers:
+
+- Opening images in OMERO.figure to create a new figure
+- How to add additional images to an existing figure
+- Arranging panels in the desired figure layout
+- How to synchronise the rendering settings between panels
+- How to add scalebars, labels and ROIs to panels
+- How to Save and Export figures as PDF or TIFF
 
 **Setup:**
 ----------
