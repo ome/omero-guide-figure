@@ -14,7 +14,7 @@ This guide covers:
 - Arranging panels in the desired figure layout
 - How to synchronize the rendering settings between panels
 - How to add scalebars, labels and ROIs to panels
-- How to Save and Export figures as PDF or TIFF
+- How to save and export figures as PDF or TIFF
 
 **Setup:**
 ----------
