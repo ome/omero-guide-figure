@@ -12,16 +12,41 @@ In this example, we will automatically add labels based on analysis results.
 ----------
 
 -  Install the OMERO.figure web app as described at https://pypi.org/project/omero-figure/
+-  Upload the script at ../scripts/Split_View_Figure.py to the OMERO scripting service
 
 **Resources:**
 --------------
 
--  2 FRAP images from https://downloads.openmicroscopy.org/images/DV/will/FRAP/
+-  Any multi-channel images, such as https://downloads.openmicroscopy.org/images/DV/siRNAi-HeLa/
+-  Any time-lapse images, such as https://downloads.openmicroscopy.org/images/DV/will/FRAP/
 
 **Step-by-Step:**
 -----------------
 
-We will use the images listed above to create a FRAP figure but you can use any time-lapse images.
+Figure creation in Python
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+OMERO.figure files are simply JSON data, stored in OMERO File Annotations with a specific
+namespace of omero.web.figure.json. We can create these files using Python scripts, uploaded to
+the OMERO.scripting service to make them available to all OMERO users.
+
+The format of the JSON is described at https://github.com/will-moore/figure/blob/figure_json_docs/docs/figure_file_format.rst.
+We will use the example :download:`Split_View_Figure.py <../scripts/Split_View_Figure.py>` script.
+
+#. Select a few images in the webclient.
+
+#. Click on the Script button \ |script_icon|\  in the top-right of the webclient and choose the
+   ``Split_View_Figure.py`` script (e.g. under Workshop Scripts).
+
+#. Run the script. When complete, open the OMERO.figure app and File > Open.
+
+#. Choose the most recent figure, called "Split View Figure".
+
+
+Figure editing in JavaScript
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+We will use the time-lapse images listed above to create a FRAP figure but you can use any time-lapse images.
 
     .. image:: images/script_frap_figure.png
        :scale: 75 %
@@ -85,3 +110,8 @@ We will use the images listed above to create a FRAP figure but you can use any 
 #.  The labels should be added. Note that you can undo and redo these changes in the UI as normal.
 
 #.  Try out other examples in https://github.com/ome/training-scripts/tree/v0.6.0/practical/javascript
+
+
+.. |script_icon| image:: images/scripts_icon.png
+   :width: 0.36621in
+   :height: 0.27231in
