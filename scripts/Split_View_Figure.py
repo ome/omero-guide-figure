@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # ------------------------------------------------------------------------------
-#   Copyright (C) 2017-2018 University of Dundee. All rights reserved.
+#   Copyright (C) 2020 University of Dundee. All rights reserved.
 
 #   This program is free software; you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
@@ -20,17 +20,16 @@
 # ------------------------------------------------------------------------------
 
 """
-Simple FRAP plots from Ellipses on images and creates an OMERO.figure.
+Creates an OMERO.figure file of a Split-View figure.
 
 This an OMERO script that runs server-side.
 """
 
-import omero
 import json
 from io import BytesIO
 
 import omero.scripts as scripts
-from omero.rtypes import rlong, rstring, unwrap
+from omero.rtypes import rlong, rstring
 from omero.gateway import BlitzGateway
 from omero.model import FileAnnotationI, OriginalFileI
 from omero.sys import ParametersI
@@ -120,15 +119,18 @@ def create_figure_file(conn, figure_json):
     fa = update.saveAndReturnObject(fa, conn.SERVICE_OPTS)
     return fa.getId().getValue()
 
+
 def get_ch_label(image, ch_index):
     channel = image.getChannels()[ch_index]
-    # positions are: top, left, right, leftvert, bottom, topleft, topright, bottomleft, bottomright
+    # positions are: top, left, right, leftvert, bottom, topleft,
+    # topright, bottomleft, bottomright
     return {
         "text": channel.getLabel(),
         "size": 12,
         "position": "top",
         "color": channel.getColor().getHtml()
     }
+
 
 def get_scalebar_json():
     """Return JSON to add a 10 micron scalebar to bottom-right."""
