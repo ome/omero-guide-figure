@@ -111,6 +111,7 @@ def create_figure_file(conn, figure_json):
     update = conn.getUpdateService()
     orig_file = conn.createOriginalFileFromFileObj(
         f, '', figure_name, file_size, mimetype="application/json")
+    f.close()
     fa = FileAnnotationI()
     fa.setFile(OriginalFileI(orig_file.getId(), False))
     fa.setNs(rstring(JSON_FILEANN_NS))
