@@ -137,9 +137,9 @@ def get_image_labels(image, params):
     labels = []
     if params['Row_Labels'] == 'Name':
         labels.append({"text": image.getName(),
-                 "size": 12,
-                 "position": "leftvert",
-                 "color": "000000"})
+                       "size": 12,
+                       "position": "leftvert",
+                       "color": "000000"})
     elif params['Row_Labels'] == 'Tags':
         # Get Tags on the Image
         for ann in image.listAnnotations():
