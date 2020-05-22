@@ -31,7 +31,7 @@ from io import BytesIO
 import omero.scripts as scripts
 from omero.rtypes import rlong, rstring
 from omero.gateway import BlitzGateway
-from omero.model import FileAnnotationI, OriginalFileI
+from omero.model import FileAnnotationI, OriginalFileI, TagAnnotationI
 from omero.sys import ParametersI
 
 
@@ -85,9 +85,8 @@ def get_timestamps(conn, image):
     return time_list
 
 
-def create_figure_file(conn, figure_json):
+def create_figure_file(conn, figure_json, figure_name):
     """Create Figure FileAnnotation from json data."""
-    figure_name = "Split View Figure"
     if len(figure_json['panels']) == 0:
         raise Exception('No Panels')
     first_img_id = figure_json['panels'][0]['imageId']
@@ -133,6 +132,27 @@ def get_ch_label(image, ch_index):
     }
 
 
+def get_image_labels(image, params):
+    """Create image labels from Name or Tags."""
+    labels = []
+    if params['Row_Labels'] == 'Name':
+        labels.append({"text": image.getName(),
+                 "size": 12,
+                 "position": "leftvert",
+                 "color": "000000"})
+    elif params['Row_Labels'] == 'Tags':
+        # Get Tags on the Image
+        for ann in image.listAnnotations():
+            if ann.OMERO_TYPE == TagAnnotationI:
+                labels.append({
+                    "text": ann.getTextValue(),
+                    "size": 12,
+                    "position": "leftvert",
+                    "color": "000000",
+                })
+    return labels
+
+
 def get_scalebar_json():
     """Return JSON to add a 10 micron scalebar to bottom-right."""
     return {"show": True,
@@ -174,6 +194,7 @@ def get_panel_json(image, x, y, width, height, c_index=None):
         "name": image.getName(),
         "theT": image.getDefaultT(),
         "theZ": image.getDefaultZ(),
+        "labels": [],
     }
     if px is not None:
         img_json["pixel_size_x"] = px.getValue()
@@ -186,7 +207,7 @@ def get_panel_json(image, x, y, width, height, c_index=None):
     return img_json
 
 
-def create_omero_figure(conn, images):
+def create_omero_figure(conn, images, params):
     """Create OMERO.figure from given images."""
     figure_json = {"version": 5}
 
@@ -197,15 +218,17 @@ def create_omero_figure(conn, images):
 
     panels_json = []
 
-    for i, image in enumerate(images):
+    for row, image in enumerate(images):
         print('image', image.id, image.name)
         panel_x = margin
-        panel_y = (i * (panel_height + spacing)) + margin
+        panel_y = (row * (panel_height + spacing)) + margin
         for col in range(image.getSizeC()):
             j = get_panel_json(image, panel_x, panel_y,
                                panel_width, panel_height, col)
-            if i == 0:
-                j['labels'] = [get_ch_label(image, col)]
+            if row == 0:
+                j['labels'].append(get_ch_label(image, col))
+            if col == 0:
+                j['labels'].extend(get_image_labels(image, params))
             panels_json.append(j)
             panel_x += panel_width + spacing
         # Add merged panel
@@ -216,11 +239,13 @@ def create_omero_figure(conn, images):
         panels_json[-1]['scalebar'] = get_scalebar_json()
 
     figure_json['panels'] = panels_json
-    return create_figure_file(conn, figure_json)
+    figure_name = params['Figure_Name']
+    return create_figure_file(conn, figure_json, figure_name)
 
 
 if __name__ == "__main__":
-    dataTypes = [rstring('Dataset'), rstring('Image')]
+    dataTypes = [rstring('Image')]
+    labelTypes = [rstring('Name'), rstring('Tags')]
     client = scripts.client(
         'Split_View_Figure.py',
         """
@@ -229,11 +254,21 @@ if __name__ == "__main__":
         scripts.String(
             "Data_Type", optional=False, grouping="1",
             description="Choose source of images",
-            values=dataTypes, default="Dataset"),
+            values=dataTypes, default="Image"),
 
         scripts.List(
             "IDs", optional=False, grouping="2",
             description="Dataset or Image IDs.").ofType(rlong(0)),
+
+        scripts.String(
+            "Row_Labels", optional=False, grouping="3",
+            description="How to label each image",
+            values=labelTypes, default="Name"),
+
+        scripts.String(
+            "Figure_Name", optional=False, grouping="4",
+            description="Name of the new OMERO.figure",
+            default="Split View Figure"),
 
         authors=["Will Moore", "OME Team"],
         institutions=["University of Dundee"],
@@ -254,7 +289,7 @@ if __name__ == "__main__":
         if len(images) == 0:
             message = "No images found"
         else:
-            figure_id = create_omero_figure(conn, images)
+            figure_id = create_omero_figure(conn, images, params)
             message = "Created figure: %s" % figure_id
 
         client.setOutput("Message", rstring(message))
