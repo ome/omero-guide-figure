@@ -12,7 +12,7 @@ In this example, we will automatically add labels based on analysis results.
 ----------
 
 -  Install the OMERO.figure web app as described at https://pypi.org/project/omero-figure/
--  Upload the script at ../scripts/Split_View_Figure.py to the OMERO scripting service
+-  Upload the script :download:`Split_View_Figure.py <../scripts/Split_View_Figure.py>` to the OMERO scripting service
 
 **Resources:**
 --------------
