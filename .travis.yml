@@ -12,6 +12,11 @@ cache: pip
 env:
   - SPHINXOPTS="-W"
 
+install:
+  - pip install --upgrade sphinx
+  - pip install --upgrade flake8
+
 script:
+  - flake8 scripts
   - cd docs
   - make clean html linkcheck
