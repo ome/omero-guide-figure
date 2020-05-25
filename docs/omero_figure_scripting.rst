@@ -30,7 +30,7 @@ OMERO.figure files are simply JSON data, stored in OMERO File Annotations with a
 namespace of omero.web.figure.json. We can create these files using Python scripts, uploaded to
 the OMERO.scripting service to make them available to all OMERO users.
 
-The format of the JSON is described at https://github.com/will-moore/figure/blob/figure_json_docs/docs/figure_file_format.rst.
+The format of the JSON is described at https://github.com/ome/omero-figure/blob/master/docs/figure_file_format.rst.
 We will use the example :download:`Split_View_Figure.py <../scripts/Split_View_Figure.py>` script.
 
 #. Select a few images in the webclient.
