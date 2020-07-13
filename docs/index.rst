@@ -11,3 +11,8 @@ Contents:
 
    omero_figure
    omero_figure_scripting
+
+Contribute
+----------
+
+Changes to the documentation or the materials should be made directly in the `omero-guide-figure repository <https://github.com/ome/omero-guide-figure>`_.
