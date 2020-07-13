@@ -1,27 +1,27 @@
 OMERO.figure scripting
 ======================
 
-**Description:**
-----------------
+Description
+-----------
 
 We can use JavaScript in the browser console to script changes to a
 figure. This is an experimental feature and not documented.
 In this example, we will automatically add labels based on analysis results.
 
-**Setup:**
-----------
+Setup
+-----
 
 -  Install the OMERO.figure web app as described at https://pypi.org/project/omero-figure/
 -  Upload the script :download:`Split_View_Figure.py <../scripts/Split_View_Figure.py>` to the OMERO scripting service
 
-**Resources:**
---------------
+Resources
+---------
 
--  Any multi-channel images, such as https://downloads.openmicroscopy.org/images/DV/siRNAi-HeLa/
--  Any time-lapse images, such as https://downloads.openmicroscopy.org/images/DV/will/FRAP/
+-  Any multi-channel images, e.g. from `siRNAi-HeLa <https://downloads.openmicroscopy.org/images/DV/siRNAi-HeLa/>`__
+-  Any time-lapse images, e.g. `FRAP <https://downloads.openmicroscopy.org/images/DV/will/FRAP/>`__.
 
-**Step-by-Step:**
------------------
+Step-by-Step
+------------
 
 Figure creation in Python
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -109,7 +109,7 @@ We will use the time-lapse images listed above to create a FRAP figure but you c
 
 #.  The labels should be added. Note that you can undo and redo these changes in the UI as normal.
 
-#.  Try out other examples in https://github.com/ome/training-scripts/tree/v0.6.0/practical/javascript
+#.  Try out other examples from the *scripts* directory.
 
 
 .. |script_icon| image:: images/scripts_icon.png
