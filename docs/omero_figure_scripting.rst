@@ -109,7 +109,7 @@ We will use the time-lapse images listed above to create a FRAP figure but you c
 
 #.  The labels should be added. Note that you can undo and redo these changes in the UI as normal.
 
-#.  Try out other examples from the *scripts* directory.
+#.  Try out other examples from https://github.com/ome/training-scripts/tree/v0.6.0/practical/javascript
 
 
 .. |script_icon| image:: images/scripts_icon.png
