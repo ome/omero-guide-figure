@@ -93,7 +93,7 @@ We will use the time-lapse images listed above to create a FRAP figure but you c
 
 #.  Open the browser console by *right-click > Inspect Element (Firefox)* or *right-click > Inspect (Chrome)* and click on the *Console* tab.
 
-#.  Copy the code from https://raw.githubusercontent.com/ome/training-scripts/v0.6.0/practical/javascript/figure_frap_mapannotation_label.js
+#.  Copy the code from :download:`figure_frap_mapannotation_label.js <../scripts/figure_frap_mapannotation_label.js>`.
 
 #.  Drag to select the FRAP movie images in the figure.
 
@@ -109,7 +109,7 @@ We will use the time-lapse images listed above to create a FRAP figure but you c
 
 #.  The labels should be added. Note that you can undo and redo these changes in the UI as normal.
 
-#.  Try out other examples from https://github.com/ome/training-scripts/tree/v0.6.0/practical/javascript
+#.  Try out other JavaScript examples in the :download:`scripts <../scripts/>` folder.
 
 
 .. |script_icon| image:: images/scripts_icon.png
