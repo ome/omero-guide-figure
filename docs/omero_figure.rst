@@ -4,8 +4,8 @@ Create figures using OMERO.figure
 OMERO.figure is a web-based tool for creating figures from Images in
 OMERO. Image metadata can be used to facilitate figure creation.
 
-**Description:**
-----------------
+Description
+-----------
 
 This guide covers:
 
@@ -16,24 +16,24 @@ This guide covers:
 - How to add scalebars, labels and ROIs to panels
 - How to save and export figures as PDF or TIFF
 
-**Setup:**
-----------
+Setup
+-----
 
 -  Install the OMERO.figure web app as described at https://pypi.org/project/omero-figure/
 
-**Resources:**
---------------
+Resources
+---------
 
--  Sample images from the Image Data Resource (IDR) https://idr.openmicroscopy.org/webclient/?show=project-51.
-   See https://github.com/ome/training-scripts/blob/master/maintenance/preparation/idr0021-data-prep.md
+-  Sample images from the Image Data Resource (IDR) `idr0021 <https://idr.openmicroscopy.org/webclient/?show=project-51>`__.
+   See `idr0021-data-prep.md <https://github.com/ome/training-scripts/blob/master/maintenance/preparation/idr0021-data-prep.md>`__
    for download and import instructions.
 
--  DV images from https://downloads.openmicroscopy.org/images/DV/siRNAi-HeLa/
+-  DV images from `siRNAi-HeLa <https://downloads.openmicroscopy.org/images/DV/siRNAi-HeLa/>`__.
 
--  SVS ‘big’ pathology images from https://downloads.openmicroscopy.org/images/SVS/
+-  SVS ‘big’ pathology images from `SVS <https://downloads.openmicroscopy.org/images/SVS/>`__.
 
-**Step-by-Step:**
------------------
+Step-by-Step
+------------
 
 Using the sample images above, we will create a figure like this, but
 you can use any multi-channel images.
@@ -128,7 +128,7 @@ you can use any multi-channel images.
 Saving and exporting figures
 ----------------------------
 
-#.  Go to *File* > *Paper Setup…* and in the dialog that pops up choose *Pages: 2.* Click *OK*.
+#.  Go to *File* > *Paper Setup...* and in the dialog that pops up choose *Pages: 2.* Click *OK*.
 
 #.  Finally return to the webclient, select ‘Big’ images from the **svs** Dataset, copy the link to them and paste it into the *Add Image* dialog in OMERO.figure.
 
@@ -138,7 +138,7 @@ Saving and exporting figures
 
 #.  The URL will update. You can bookmark this URL or share with collaborators to view your figure.
 
-#.  To open other saved files, go *File > Open…*
+#.  To open other saved files, go *File > Open...*
 
 #.  We can view figures from our collaborators here and filter by name or Owner.
 
