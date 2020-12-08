@@ -4,7 +4,7 @@
 
 [![Actions Status](https://github.com/ome/omero-guide-figure/workflows/sphinx/badge.svg)](https://github.com/ome/omero-guide-figure/actions)
 
-The documentation is deployed at [How to use OMERO.figure](https://omero-guides.readthedocs.io/en/latest/fiji/docs/index.html).
+The documentation is deployed at [How to use OMERO.figure](https://omero-guides.readthedocs.io/en/latest/figure/docs/index.html).
 
 This guide demonstrates how to use the User Interface of the OMERO.figure web app but also
 how to use its scripting facility.
