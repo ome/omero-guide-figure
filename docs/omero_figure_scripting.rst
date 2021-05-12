@@ -109,7 +109,7 @@ We will use the time-lapse images listed above to create a FRAP figure but you c
 
 #.  The labels should be added. Note that you can undo and redo these changes in the UI as normal.
 
-#.  Try out other JavaScript examples in the :download:`scripts <../scripts/>` folder.
+#.  Try out other JavaScript examples in the `scripts <https://github.com/ome/omero-guide-figure/tree/master/scripts>`_ folder.
 
 
 .. |script_icon| image:: images/scripts_icon.png
