@@ -48,15 +48,6 @@ We will use the example `Split_View_Figure.py <https://github.com/ome/omero-guid
 Figure editing in JavaScript
 ----------------------------
 
-Example 1: Labels from Map Annotations
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-We will use the time-lapse images listed above to create a FRAP figure but you can use any time-lapse images.
-
-    .. image:: images/script_frap_figure.png
-       :width: 750 px
-       :align: center
-
 #.  To see the data model for any current file in OMERO.figure, go to *File > Export as JSON...*.
 
 #.  You will see that the ``panels`` list defines the panels and each panel has attributes. For example, a panel with a single white label might include the following attributes:
@@ -68,15 +59,31 @@ We will use the time-lapse images listed above to create a FRAP figure but you c
         "x": 200, "y", 200, "width": 100, "height": 100,
         ...many other attributes not shown...
 
-#.  The ``figureModel`` variable is accessible in the console. We can use ``figureModel.getSelected()`` to get selected panels and for each panel we can call ``p.set()`` to change an attribute.
+#.  The ``figureModel`` variable is accessible in the `Console` of the browser `Developer Tools`. The easiest way to open
+    the developer tools in most browsers is to open the context menu (right-click) anywhere on the page and choose `Inspect`.
 
-#.  For example, to set the ``height`` of each selected panel to ``200``, we can do:
+#.  We can use ``figureModel.getSelected()`` to get selected panels and for each panel we can call ``p.set()`` to change an attribute.
+
+#.  For example, to set the ``height`` of several panels to ``200``, we can select the panels in the figure UI and paste
+    this code snippet in the `Console`:
 
     ::
 
         figureModel.getSelected().forEach(function(p){
             p.set('height', 200)
         });
+
+#.  There are several JavaScript examples in the `scripts <https://github.com/ome/omero-guide-figure/tree/master/scripts>`_ folder.
+    Many of these are quite simple and self-explanatory. Below are some more complex examples that require specific set-up steps.
+
+Example 1: Labels from Map Annotations
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+We will use the time-lapse images listed above to create a FRAP figure but you can use any time-lapse images.
+
+    .. image:: images/script_frap_figure.png
+       :width: 750 px
+       :align: center
 
 #.  We can use AJAX to load JSON data and we will use ``p.add_labels()`` to create labels.
 
@@ -98,7 +105,7 @@ We will use the time-lapse images listed above to create a FRAP figure but you c
 
 #.  Open the browser console by *right-click > Inspect Element (Firefox)* or *right-click > Inspect (Chrome)* and click on the *Console* tab.
 
-#.  Copy the code from :download:`figure_frap_mapannotation_label.js <https://github.com/ome/omero-guide-figure/tree/master/scripts/figure_frap_mapannotation_label.js>`.
+#.  Copy the code from `figure_frap_mapannotation_label.js <https://github.com/ome/omero-guide-figure/tree/master/scripts/figure_frap_mapannotation_label.js>`.
 
 #.  Drag to select the FRAP movie images in the figure.
 
@@ -113,8 +120,6 @@ We will use the time-lapse images listed above to create a FRAP figure but you c
 #.  Hit Enter to run the code on selected panels.
 
 #.  The labels should be added. Note that you can undo and redo these changes in the UI as normal.
-
-#.  Try out other JavaScript examples in the `scripts <https://github.com/ome/omero-guide-figure/tree/master/scripts>`_ folder.
 
 
 .. |script_icon| image:: images/scripts_icon.png
