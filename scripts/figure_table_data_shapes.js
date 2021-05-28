@@ -20,7 +20,7 @@
 // feature for developers.
 // N.B.: Never paste untrusted code into your browser console.
 //
-// This code expects an OMERO.table with an 'Roi' column to be linked
+// This code expects an OMERO.table with an 'Shape' column to be linked
 // to the Image(s) and for the Image panel to have Shapes added from
 // OMERO (so that the shape.id in the figure corresponds to a Shape in OMERO).
 // This code loads values from a named numerical column (see name in code)
@@ -29,24 +29,16 @@
 async function shapeData(panel) {
     const shapeIds = panel.get("shapes").map(s => s.id).filter(id => id > 0);
     console.log('shapeIds', shapeIds);
-    // Need to get ROI ID for each shape...
-    // ******* NB: this requires https://github.com/ome/omero-web/pull/291 ********
-    // ******* AND https://github.com/ome/omero-marshal/pull/71 ********
-    const promises = shapeIds.map(shapeId => {
-        return fetch(`/api/v0/m/shapes/${shapeId}/`)
-            .then(rsp => rsp.json())
-            .then(data => data.data.roi);
-    });
-    const roiIds = await Promise.all(promises);
     let vals_by_shape = {};
-    for (let i=0; i<shapeIds.length; i++) {
+    for (let i = 0; i < shapeIds.length; i++) {
         // Load one at a time - more reliable
-        let url = `/webgateway/table/Image/${panel.get('imageId')}/query/?query=Roi-${roiIds[i]}`;
+        let url = `/webgateway/table/Image/${panel.get('imageId')}/query/?query=Shape-${shapeIds[i]}`;
         let r = await fetch(url).then(rsp => rsp.json());
-        let colIndex = r.data?.columns?.indexOf("Spericity");
-        if (colIndex && r.data?.rows.length > 0) {
+        let colIndex = r.data?.columns?.indexOf("Sphericity");
+        let shapeIndex = r.data?.columns?.indexOf("Shape");
+        if (colIndex && shapeIndex && r.data?.rows.length > 0) {
             console.log("Value", r.data.rows[0][colIndex]);
-            vals_by_shape[shapeIds[i]] = r.data.rows[0][colIndex];
+            vals_by_shape[r.data.rows[0][shapeIndex]] = r.data.rows[0][colIndex];
         }
     };
     // Once all loaded, we can calculate range and assign colours to shapes
@@ -56,14 +48,14 @@ async function shapeData(panel) {
     console.log('min, range', minVal, valRange);
     const new_shapes = panel.get("shapes").map(shape => {
         // hide any shapes we don't have data for
-        if (!vals_by_shape[shape.id]) return { ...shape, strokeWidth: 0.01};
+        if (!vals_by_shape[shape.id]) return { ...shape, strokeWidth: 0.01 };
         let value = (vals_by_shape[shape.id] - minVal) / valRange;
         let red = parseInt(value * 255).toString(16);
-        let blue = (255 - parseInt(value * 255)).toString(16);
-        // Convert e.g. 'f' -> '0f' if needed
+        let green = (255 - parseInt(value * 255)).toString(16);
+        // if e.g. "f", -> "0f"
         red = red.length == 1 ? `0` + red : red;
-        blue = blue.length == 1 ? `0` + blue : blue;
-        return { ...shape, strokeColor: `#${red}00${blue}`, strokeWidth: 5 }
+        green = green.length == 1 ? `0` + green : green;
+        return { ...shape, strokeColor: `#${red}${green}00`, strokeWidth: 5 }
     });
     panel.set('shapes', new_shapes);
 }

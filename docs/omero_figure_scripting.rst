@@ -132,12 +132,10 @@ This means that each shape JSON will have an ``id`` that corresponds to a Shape 
 OMERO.
 
 The code at `figure_table_data_shapes.js <https://github.com/ome/omero-guide-figure/tree/master/scripts/figure_table_data_shapes.js>`_
-first queries OMERO to get the ROI ID for each Shape, using a query of the form:
-``/api/v0/m/shapes/{shapeId}/``. 
-Then the ROI ID is used to query the most recent OMERO.table on the Image using the
-endpoint: ``/webgateway/table/Image/{imageId}/query/?query=Roi-{roiId}``, which returns
-all table rows for that ROI ID. From the JSON returned, we find the column index for the
-data we want, e.g. "Spericity", and then get the value for that column.
+uses the ID of each shape of the panel to query the most recent OMERO.table on the Image using the
+endpoint: ``/webgateway/table/Image/{imageId}/query/?query=Shape-{shapeId}``, which returns
+all table rows for that Shape ID. From the JSON returned, we find the column index for the
+data we want, e.g. "Sphericity", and then get the value for that column.
 
 Once the values for all Shapes on the panel are loaded, the code calculates the range and
 generates a heatmap color for each value in that range. This is set as the color
