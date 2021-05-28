@@ -20,11 +20,8 @@ Resources
 -  Any multi-channel images, e.g. from `siRNAi-HeLa <https://downloads.openmicroscopy.org/images/DV/siRNAi-HeLa/>`__
 -  Any time-lapse images, e.g. `FRAP <https://downloads.openmicroscopy.org/images/DV/will/FRAP/>`__.
 
-Step-by-Step
-------------
-
 Figure creation in Python
-~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------
 
 OMERO.figure files are simply JSON data, stored in OMERO File Annotations with a specific
 namespace of omero.web.figure.json. We can create these files using Python scripts, uploaded to
@@ -33,23 +30,31 @@ the OMERO.scripting service to make them available to all OMERO users.
 The format of the JSON is described in the `Format <https://github.com/ome/omero-figure/blob/master/docs/figure_file_format.rst>`_ page.
 We will use the example :download:`Split_View_Figure.py <../scripts/Split_View_Figure.py>` script.
 
-#. Select a few images in the webclient.
+#. Select a few Images in the webclient.
 
 #. Click on the Script button \ |script_icon|\  in the top-right of the webclient and choose the
    ``Split_View_Figure.py`` script (e.g. under Workshop Scripts).
+
+#. Choose a value for `Row Labels` input. The default is label each row with the Image `Name`,
+   but you can also choose `Tags` as in the example below.
 
 #. Run the script. When complete, open the OMERO.figure app and File > Open.
 
 #. Choose the most recent figure, called "Split View Figure".
 
+    .. image:: images/script_split_view_figure.png
+       :width: 515 px
 
 Figure editing in JavaScript
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+----------------------------
+
+Example 1: Labels from Map Annotations
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 We will use the time-lapse images listed above to create a FRAP figure but you can use any time-lapse images.
 
     .. image:: images/script_frap_figure.png
-       :scale: 75 %
+       :width: 750 px
        :align: center
 
 #.  To see the data model for any current file in OMERO.figure, go to *File > Export as JSON...*.
@@ -115,3 +120,28 @@ We will use the time-lapse images listed above to create a FRAP figure but you c
 .. |script_icon| image:: images/scripts_icon.png
    :width: 0.36621in
    :height: 0.27231in
+
+
+Example 2: Shapes heatmap from OMERO.table
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This example uses an OMERO.table linked to each Image to generate
+a heatmap of colors applied to Shapes on the figure panel.
+Selected panels need to have Shapes added from OMERO (in the ROIs dialog).
+This means that each shape JSON will have an ``id`` that corresponds to a Shape in
+OMERO.
+
+The code at `figure_table_data_shapes.js <https://github.com/ome/omero-guide-figure/tree/master/scripts/figure_table_data_shapes.js>`_
+first queries OMERO to get the ROI ID for each Shape, using a query of the form:
+``/api/v0/m/shapes/{shapeId}/``. 
+Then the ROI ID is used to query the most recent OMERO.table on the Image using the
+endpoint: ``/webgateway/table/Image/{imageId}/query/?query=Roi-{roiId}``, which returns
+all table rows for that ROI ID. From the JSON returned, we find the column index for the
+data we want, e.g. "Spericity", and then get the value for that column.
+
+Once the values for all Shapes on the panel are loaded, the code calculates the range and
+generates a heatmap color for each value in that range. This is set as the color
+on each Shape.
+
+    .. image:: images/script_idr0079_heatmap.png
+       :width: 690 px
