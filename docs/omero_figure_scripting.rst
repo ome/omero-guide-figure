@@ -28,7 +28,7 @@ namespace of omero.web.figure.json. We can create these files using Python scrip
 the OMERO.scripting service to make them available to all OMERO users.
 
 The format of the JSON is described in the `Format <https://github.com/ome/omero-figure/blob/master/docs/figure_file_format.rst>`_ page.
-We will use the example :download:`Split_View_Figure.py <../scripts/Split_View_Figure.py>` script.
+We will use the example `Split_View_Figure.py <https://github.com/ome/omero-guide-figure/tree/master/scripts/Split_View_Figure.py>`_ script.
 
 #. Select a few Images in the webclient.
 
@@ -98,7 +98,7 @@ We will use the time-lapse images listed above to create a FRAP figure but you c
 
 #.  Open the browser console by *right-click > Inspect Element (Firefox)* or *right-click > Inspect (Chrome)* and click on the *Console* tab.
 
-#.  Copy the code from :download:`figure_frap_mapannotation_label.js <../scripts/figure_frap_mapannotation_label.js>`.
+#.  Copy the code from :download:`figure_frap_mapannotation_label.js <https://github.com/ome/omero-guide-figure/tree/master/scripts/figure_frap_mapannotation_label.js>`.
 
 #.  Drag to select the FRAP movie images in the figure.
 
