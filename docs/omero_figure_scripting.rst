@@ -133,7 +133,7 @@ Example 2: Shapes heatmap from OMERO.table
 This example uses an OMERO.table linked to each Image to generate
 a heatmap of colors applied to Shapes on the figure panel.
 Selected panels need to have Shapes added from OMERO (in the ROIs dialog).
-This means that each shape JSON will have an ``id`` that corresponds to a Shape in
+Thus, each shape JSON will have an ``id`` that corresponds to a Shape in
 OMERO.
 
 The code at `figure_table_data_shapes.js <https://github.com/ome/omero-guide-figure/tree/master/scripts/figure_table_data_shapes.js>`_
