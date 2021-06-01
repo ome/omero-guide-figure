@@ -153,7 +153,7 @@ on each Shape.
 
 In the screenshot below, Shapes in the first panel are colored according to the ``Centroids_RAW_X``
 column and Shapes on the lower panel are colored according to the ``Sphericity`` column.
-Images are from `idr0079`.
+Images in this example are from `idr0079`.
 
     .. image:: images/script_idr0079_heatmap.png
        :width: 690 px
