@@ -13,15 +13,17 @@ Setup
 
 -  Install the OMERO.figure web app as described at https://pypi.org/project/omero-figure/
 -  Upload the script :download:`Split_View_Figure.py <../scripts/Split_View_Figure.py>` to the OMERO scripting service
--  For the `Shapes heatmap from OMERO.table` example, you'll need to draw ROIs on an Image and create an OMERO.table on the
-   Image with a ``Shape`` column with corresponding Shape IDs, as described at `omero-metadata <https://github.com/ome/omero-metadata#populate>`_
+-  For the :ref:`Shapes heatmap from OMERO.table<omeroTableData>` example, you'll need to draw ROIs on an Image and create an OMERO.table on the
+   Image with a ``Shape`` column with corresponding Shape IDs, as described below.
 
 Resources
 ---------
 
--  For `Figure creation in Python`, any multi-channel images, e.g. from `siRNAi-HeLa <https://downloads.openmicroscopy.org/images/DV/siRNAi-HeLa/>`__
--  For the `Labels from Map Annotations` example, any time-lapse images, e.g. `FRAP <https://downloads.openmicroscopy.org/images/DV/will/FRAP/>`__.
+-  For :ref:`Figure creation in Python<figureCreationPython>`, any multi-channel images, e.g. from `siRNAi-HeLa <https://downloads.openmicroscopy.org/images/DV/siRNAi-HeLa/>`__
+-  For the :ref:`Labels from Map Annotations<labelsFromMapAnnotations>` example, any time-lapse images, e.g. `FRAP <https://downloads.openmicroscopy.org/images/DV/will/FRAP/>`__.
 -  For the other sections, any images can be used.
+
+.. _figureCreationPython:
 
 Figure creation in Python
 -------------------------
@@ -79,6 +81,8 @@ Figure editing in JavaScript
 #.  There are several JavaScript examples in the `scripts <https://github.com/ome/omero-guide-figure/tree/master/scripts>`_ folder.
     Many of these are quite simple and self-explanatory. Below are some more complex examples that require specific set-up steps.
 
+.. _labelsFromMapAnnotations:
+
 Example 1: Labels from Map Annotations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -129,31 +133,63 @@ We will use the time-lapse images listed above to create a FRAP figure but you c
    :width: 0.36621in
    :height: 0.27231in
 
+.. _omeroTableData:
 
 Example 2: Shapes heatmap from OMERO.table
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This example uses an OMERO.table linked to each Image to generate
 a heatmap of colors applied to Shapes on the figure panel.
-Selected panels need to have Shapes added from OMERO (in the ROIs dialog).
-Thus, each shape JSON will have an ``id`` that corresponds to a Shape in
-OMERO.
 
-The code at `figure_table_data_shapes.js <https://github.com/ome/omero-guide-figure/tree/master/scripts/figure_table_data_shapes.js>`_
-uses the ID of each shape of the panel to query the most recent OMERO.table on the Image using the
-endpoint: ``/webgateway/table/Image/{imageId}/query/?query=Shape-{shapeId}``, which returns
-all table rows for that Shape ID. From the JSON returned, we find the column index for the
-data we want, e.g. ``Sphericity``, and then get the value for that column.
-To see the available columns for the table, find the table under the Image's `Annotations` tab in the
-webclient and click the `eye` icon to view the table.
+**Setup:**
 
-Once the values for all Shapes on the panel are loaded, the code calculates the range and
-generates a heatmap color for each value in that range. This is set as the color
-on each Shape.
+#.  If you wish to use Images and table data from `idr0079`, see the setup steps
+    at `idr0079-data-prep <https://github.com/will-moore/training-scripts/blob/ome_2021_workshop_features/maintenance/preparation/idr0079-data-prep.md>`_.
 
-In the screenshot below, Shapes in the first panel are colored according to the ``Centroids_RAW_X``
-column and Shapes on the lower panel are colored according to the ``Sphericity`` column.
-Images in this example are from `idr0079`.
+#.  Alternatively, perform the following steps:
+
+#.  For the Image you wish to use, add some ROIs to the Image. You can see the ROI and Shape IDs in the iviewer ROI table.
+
+#.  To setup the OMERO.table, create a CSV file with an ``Roi`` column and a ``Shape`` column containing the corresponding IDs and 1
+    or more number columns. The ``#header`` defines the column types: ``l`` (long) for `integers` and ``d`` (double) for `floats`.
+    For example:
+
+    ::
+
+        # header roi,l,d,d,l
+        Roi,Shape,Area,Sphericity,Pixels
+        1,10,34.5,0.5,110
+        2,11,18.2,0.6,55
+        2,12,44.1,0.9,210
+
+#.  Save the edited csv as ``data.csv``.
+
+#.  With ``omero-metadata`` installed on the command-line, we can create an OMERO.table on the Image, using the Image ID:
+
+    ::
+
+        $ omero metadata populate Image:123 --file data.csv
+
+**OMERO.figure steps:**
+
+#.  In OMERO.figure, add the Image to the figure, then in the ROIs dialog, load the Shapes from OMERO and add
+    them to the panel. The JSON data for each Shape will have an ``id`` that corresponds to the Shape in
+    OMERO.
+
+#.  View the JavaScript snippet at `figure_table_data_shapes.js <https://github.com/ome/omero-guide-figure/tree/master/scripts/figure_table_data_shapes.js>`_.
+    This uses the ID of each Shape of the panel to query the most recent OMERO.table on the Image using the
+    endpoint: ``/webgateway/table/Image/{imageId}/query/?query=Shape-{shapeId}``, which returns
+    all table rows for that Shape ID. From the JSON returned, we find the column index for the
+    data we want, e.g. ``Sphericity``, and then get the value for that column.
+    Once the values for all Shapes on the panel are loaded, the code calculates the range and
+    generates a heatmap color for each value in that range. This is set as the color
+    on each Shape.
+
+#.  Select the panel in the figure, then paste the JavaScript code into the browser `Console` and hit Enter
+
+#.  In the screenshot below, Shapes in the first panel are colored according to the ``Centroids_RAW_X``
+    column and Shapes on the lower panel are colored according to the ``Sphericity`` column.
+    Images in this example are from `idr0079`.
 
     .. image:: images/script_idr0079_heatmap.png
        :width: 690 px
