@@ -13,24 +13,27 @@ Setup
 
 -  Install the OMERO.figure web app as described at https://pypi.org/project/omero-figure/
 -  Upload the script :download:`Split_View_Figure.py <../scripts/Split_View_Figure.py>` to the OMERO scripting service
+-  For the `Shapes heatmap from OMERO.table` example, you'll need to draw ROIs on an Image and create an OMERO.table on the
+   Image with a ``Shape`` column with corresponding Shape IDs, as described at `omero-metadata <https://github.com/ome/omero-metadata#populate>`_
 
 Resources
 ---------
 
--  Any multi-channel images, e.g. from `siRNAi-HeLa <https://downloads.openmicroscopy.org/images/DV/siRNAi-HeLa/>`__
--  Any time-lapse images, e.g. `FRAP <https://downloads.openmicroscopy.org/images/DV/will/FRAP/>`__.
+-  For `Figure creation in Python`, any multi-channel images, e.g. from `siRNAi-HeLa <https://downloads.openmicroscopy.org/images/DV/siRNAi-HeLa/>`__
+-  For the `Labels from Map Annotations` example, any time-lapse images, e.g. `FRAP <https://downloads.openmicroscopy.org/images/DV/will/FRAP/>`__.
+-  For the other sections, any images can be used.
 
 Figure creation in Python
 -------------------------
 
 OMERO.figure files are simply JSON data, stored in OMERO File Annotations with a specific
-namespace of omero.web.figure.json. We can create these files using Python scripts, uploaded to
+namespace of ``omero.web.figure.json``. We can create these files using Python scripts, uploaded to
 the OMERO.scripting service to make them available to all OMERO users.
 
 The format of the JSON is described in the `Format <https://github.com/ome/omero-figure/blob/master/docs/figure_file_format.rst>`_ page.
 We will use the example `Split_View_Figure.py <https://github.com/ome/omero-guide-figure/tree/master/scripts/Split_View_Figure.py>`_ script.
 
-#. Select a few Images in the webclient.
+#. Select a few multi-channel Images in the webclient.
 
 #. Click on the Script button \ |script_icon|\  in the top-right of the webclient and choose the
    ``Split_View_Figure.py`` script (e.g. under Workshop Scripts).
@@ -140,11 +143,17 @@ The code at `figure_table_data_shapes.js <https://github.com/ome/omero-guide-fig
 uses the ID of each shape of the panel to query the most recent OMERO.table on the Image using the
 endpoint: ``/webgateway/table/Image/{imageId}/query/?query=Shape-{shapeId}``, which returns
 all table rows for that Shape ID. From the JSON returned, we find the column index for the
-data we want, e.g. "Sphericity", and then get the value for that column.
+data we want, e.g. ``Sphericity``, and then get the value for that column.
+To see the available columns for the table, find the table under the Image's `Annotations` tab in the
+webclient and click the `eye` icon to view the table.
 
 Once the values for all Shapes on the panel are loaded, the code calculates the range and
 generates a heatmap color for each value in that range. This is set as the color
 on each Shape.
+
+In the screenshot below, Shapes in the first panel are colored according to the ``Centroids_RAW_X``
+column and Shapes on the lower panel are colored according to the ``Sphericity`` column.
+Images are from `idr0079`.
 
     .. image:: images/script_idr0079_heatmap.png
        :width: 690 px
