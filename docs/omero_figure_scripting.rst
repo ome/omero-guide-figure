@@ -4,9 +4,8 @@ OMERO.figure scripting
 Description
 -----------
 
-We can use JavaScript in the browser console to script changes to a
-figure. This is an experimental feature and not documented.
-In this example, we will automatically add labels based on analysis results.
+We can use Python scripts on the OMERO.server or JavaScript in the browser Console to create or
+modify OMERO.figures. These are experimental features and not documented elsewhere.
 
 Setup
 -----
@@ -14,7 +13,7 @@ Setup
 -  Install the OMERO.figure web app as described at https://pypi.org/project/omero-figure/
 -  Upload the script :download:`Split_View_Figure.py <../scripts/Split_View_Figure.py>` to the OMERO scripting service
 -  For the :ref:`Shapes heatmap from OMERO.table<omeroTableData>` example, you'll need to draw ROIs on an Image and create an OMERO.table on the
-   Image with a ``Shape`` column with corresponding Shape IDs, as described below.
+   Image with a ``Shape`` column as described in the example.
 
 Resources
 ---------
