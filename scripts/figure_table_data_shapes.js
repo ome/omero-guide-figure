@@ -32,7 +32,8 @@ async function shapeData(panel) {
     let vals_by_shape = {};
     for (let i = 0; i < shapeIds.length; i++) {
         // Load one at a time - more reliable
-        let url = `/webgateway/table/Image/${panel.get('imageId')}/query/?query=Shape-${shapeIds[i]}`;
+        let base_url = window.location.href.split("figure")[0];
+        let url = base_url + `webgateway/table/Image/${panel.get('imageId')}/query/?query=Shape-${shapeIds[i]}`;
         let r = await fetch(url).then(rsp => rsp.json());
         let colIndex = r.data?.columns?.indexOf("Sphericity");
         let shapeIndex = r.data?.columns?.indexOf("Shape");
