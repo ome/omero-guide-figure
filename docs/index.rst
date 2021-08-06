@@ -11,6 +11,7 @@ Contents:
 
    omero_figure
    omero_figure_scripting
+   omero_figure_move
 
 Contribute
 ----------
