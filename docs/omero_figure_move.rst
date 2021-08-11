@@ -15,18 +15,12 @@ This guide covers:
 Setup
 -----
 
--  Install the scripts ``Figure Images to Dataset`` and 
+-  Install the scripts ``Figure Images to Dataset`` and ``Dataset Images To New Figure`` on your OMERO.server. 
 
 Resources
 ---------
 
--  Sample images from the Image Data Resource (IDR) `idr0021 <https://idr.openmicroscopy.org/search/?query=Name:idr0021>`__.
-   See `idr0021-data-prep.md <https://github.com/ome/training-scripts/blob/master/maintenance/preparation/idr0021-data-prep.md>`__
-   for download and import instructions.
-
--  DV images from `siRNAi-HeLa <https://downloads.openmicroscopy.org/images/DV/siRNAi-HeLa/>`__.
-
--  SVS ‘big’ pathology images from `SVS <https://downloads.openmicroscopy.org/images/SVS/>`__.
+-  Any images and Figures created from these images.
 
 Step-by-Step
 ------------
@@ -62,7 +56,7 @@ Step-by-Step
 
 #.  Go back to the tab with OMERO.web, create a new Dataset and select it.
 
-#.  Go to ``Scripts > Figure scripts`` and select the ``Figure Images to Dataset`` script |image1|. Start the script and paste into the dialog which appears your Figure IDs, separated with commas and no spaces, e.g. ``79828,79830,71228``. Click ``Run``.
+#.  Click on the ``Scripts`` icon |image1| above the central pane of OMERO.web. Select ``Figure scripts > Figure Images to Dataset``. Start the script and paste into the dialog which appears your Figure IDs, separated with commas and no spaces, e.g. ``79828,79830,71228``. Click ``Run``.
 
 #.  When the script finishes, refresh the page and find the images contained in your Figure linked to the Dataset. Note that the images are only doubly-linked to two Datasets now, and no independent copy of the images was done in this step.
 
@@ -81,16 +75,18 @@ Step-by-Step
 
     which will retrieve all the Figure IDs of user with ID 454 in a group ``Lab1`` in a format which you can immediately copy and paste into the ``Figure Images to Dataset`` script.
 
+#.  Duplicate the Dataset with the images contained in the Figures as described in...
 
+#.  
 Then, select the new dataset and start Will's script. Into the dialog which appears paste the ids of the figures and the script will copy the links to your images into the Dataset. You can then choose to either duplicate the Dataset and move the duplicate into the other group (this would need an exchange of IDs later in the new group or the follow-up script) or move the images as they are. 
 
 
 
 
 
-.. |image1| image:: images/move_fig_to_dataset.png
-   :width: 0.20833in
-   :height: 0.20833in
+.. |image1| image:: images/scripts_icon.png
+   :width: 0.36621in
+   :height: 0.27231in
 .. |image4| image:: images/image4.png
    :width: 0.36458in
    :height: 0.25in
