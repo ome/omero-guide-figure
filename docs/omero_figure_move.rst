@@ -52,7 +52,7 @@ Step-by-Step
 
     has the Figure ID ``79828``.
 
-#.  Repeat the step above for all the Figures containing the images you want to move.
+#.  Repeat the step above for all the Figures containing the images you want to move. Retain the Figure IDs (for example saving them as a text document) for later use.
 
 #.  Go back to the tab with OMERO.web, create a new Dataset and select it.
 
@@ -64,29 +64,32 @@ Step-by-Step
 
 #.  Move the images into the group you have moved the Figure to. This will enable any user permitted to see your images in the target group to view your Figure.
 
-*Duplication of images, move and reconstitution of Figure duplicates using a script*
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*Duplication of images, move and re-create Figure(s) in the new group using a script*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#.  In case you want to have both Figures and the images contained in them in both groups, the original and the target group, you can use a following workflow.
+In case you want to have both Figures and the images contained in them in both groups, the original and the target group, you can use following workflow. Note that this workflow involves usage of Command Line.
 
-#.  Retrieve the images contained in the Figures using the workflow above. For this, you can find out the Figure IDs either manually or by running hql queries on the command line, such as::
+#.  Retrieve the images contained in the Figures using the workflow above. For this, you can find out the Figure IDs either manually as described in the chapter [LINK above] or by running hql queries on the command line, such as::
 
     $ omero hql --all --limit 1000 --style plain --ids-only  "select f.id from FileAnnotation f where (f.details.group.name = 'Lab1' and f.details.owner.id = 454)" | sed -e 's/^.*,//g' | paste -s -d, -
 
     which will retrieve all the Figure IDs of user with ID 454 in a group ``Lab1`` in a format which you can immediately copy and paste into the ``Figure Images to Dataset`` script.
 
-#.  Duplicate the Dataset with the images contained in the Figures as described in...
+#.  Start your command line terminal and duplicate the Dataset with the images contained in the Figures as described in [LINK to DUPLICATE]
 
-#.  
-Then, select the new dataset and start Will's script. Into the dialog which appears paste the ids of the figures and the script will copy the links to your images into the Dataset. You can then choose to either duplicate the Dataset and move the duplicate into the other group (this would need an exchange of IDs later in the new group or the follow-up script) or move the images as they are. 
+#.  Go to OMERO.web, select the duplicate dataset and Move it to the target group. For that, right-click and select ``Move to Group...``.
 
+#.  Find the duplicate Dataset in the target group and select it.
 
+#.  Click on the ``Scripts`` icon |image1| above the central pane of OMERO.web. Select ``Figure scripts > Dataset Images To New Figure``. 
 
+#.  Into the dialog which appears paste your Figure IDs, separated with commas and no spaces, e.g. ``79828,79830,71228``. Click ``Run``.
+
+#.  Click on ``Figure`` link above the central pane to get into OMERO.figure.
+
+#.  Inside OMERO.figure, click ``File > Open``. In the top-right corner of the new dialog, click on the ``Group`` dropdown and select your target group name. Verify that the list contains the newly created figures. 
 
 
 .. |image1| image:: images/scripts_icon.png
    :width: 0.36621in
    :height: 0.27231in
-.. |image4| image:: images/image4.png
-   :width: 0.36458in
-   :height: 0.25in
