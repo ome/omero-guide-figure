@@ -15,7 +15,9 @@ This guide covers:
 Setup
 -----
 
--  Install the scripts ``Figure Images to Dataset`` and ``Dataset Images To New Figure`` on your OMERO.server. 
+-  Install the scripts :download:`Figure_Images_To_Dataset.py <../scripts/Figure_Images_To_Dataset.py>` and :download:`Dataset_Images_To_New_Figure.py <../scripts/Dataset_Images_To_New_Figure.py>`  on your OMERO.server.
+-  We suggest in this workflow the installation under a folder ``Figure scripts`` but you can install the script in any folder.
+-  See `server-side script guides <https://omero-guides.readthedocs.io/en/latest/scripts/docs/index.html>`__ for further details.
 
 Resources
 ---------
@@ -26,11 +28,11 @@ Step-by-Step
 ------------
 
 *Moving of figures using OMERO.web user interface*
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This workflow assumes that you have an OMERO.figure already created and want to move this figure into another group.
 
 #.  Log in to OMERO.web.
-
-#.  We assume that you have an OMERO.figure already created and want to move this figure into another group.
 
 #.  Click on ``Figure`` link above the central pane to get into OMERO.figure.
 
@@ -42,6 +44,8 @@ Step-by-Step
 
 .. note::
       You might want to move the images contained in the Figure to the other group as well. This step is optional, if you want to use your figures by yourself only, but you should consider it in case the users you want to share your figure with do not have permissions to see your images in the original group (for example they are members of the target group only).  
+
+.. _Retrieval:
 
 *Retrieval of images contained in figures using a script*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -69,17 +73,17 @@ Step-by-Step
 
 In case you want to have both Figures and the images contained in them in both groups, the original and the target group, you can use following workflow. Note that this workflow involves usage of Command Line.
 
-#.  Retrieve the images contained in the Figures using the workflow above. For this, you can find out the Figure IDs either manually as described in the chapter [LINK above] or by running hql queries on the command line, such as::
+#.  Retrieve the images contained in the Figures using the workflow above. For this, you can find out the Figure IDs either manually as described in the chapter :ref:`Retrieval<Retrieval>` or by running hql queries on the command line, such as::
 
     $ omero hql --all --limit 1000 --style plain --ids-only  "select f.id from FileAnnotation f where (f.details.group.name = 'Lab1' and f.details.owner.id = 454)" | sed -e 's/^.*,//g' | paste -s -d, -
 
     which will retrieve all the Figure IDs of user with ID 454 in a group ``Lab1`` in a format which you can immediately copy and paste into the ``Figure Images to Dataset`` script.
 
-#.  Start your command line terminal and duplicate the Dataset with the images contained in the Figures as described in [LINK to DUPLICATE]
+#.  Start your command line terminal and duplicate the Dataset with the images contained in the Figures as described in `the Duplicate workflow <https://omero-guides.readthedocs.io/en/latest/introduction/docs/data-management.html#command-line-duplicating-objects>`__.
 
-#.  Go to OMERO.web, select the duplicate dataset and Move it to the target group. For that, right-click and select ``Move to Group...``.
+#.  Go to OMERO.web, select the duplicate Dataset and Move it to the target group. For that, follow `the Move workflow <https://omero-guides.readthedocs.io/en/latest/introduction/docs/data-management.html#move-data-between-groups>`__.
 
-#.  Find the duplicate Dataset in the target group and select it.
+#.  Find the Dataset which you have just moved and select it.
 
 #.  Click on the ``Scripts`` icon |image1| above the central pane of OMERO.web. Select ``Figure scripts > Dataset Images To New Figure``. 
 
