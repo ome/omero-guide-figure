@@ -1,7 +1,7 @@
 Move Figures between Groups
 ===========================
 
-Moving Figures between Groups in OMERO might be necessary for example in cases where a scientist decides to move all their data into another Group to enable cooperation and viewing by other colleagues or to a Group which is to be made public later. 
+Moving Figures between Groups in OMERO might be necessary for example in cases where a scientist decides to move their data into another Group to enable cooperation and viewing by other colleagues or to make the data public.
 
 As with all data in OMERO, Figures belong to a particular Group and are visible only to members of that Group. Figures can contain Images from the same Group as the Figure or from any other Group. Figures and the Images they contain can be independently moved from one Group to another but should ideally be kept in the same Group. This avoids the situation when a user can view a Figure, but not the Images within it.
 
