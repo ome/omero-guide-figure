@@ -159,7 +159,7 @@ a heatmap of colors applied to Shapes on the figure panel.
         Roi,Area,Sphericity,Pixels
         1,34.5,0.5,110
         2,18.2,0.6,55
-        2,44.1,0.9,210
+        3,44.1,0.9,210
 
 #.  Save the edited csv as ``data.csv``.
 
