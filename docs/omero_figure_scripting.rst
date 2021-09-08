@@ -155,7 +155,7 @@ a heatmap of colors applied to Shapes on the figure panel.
 
     ::
 
-        # header roi,l,d,d,l
+        # header roi,d,d,l
         Roi,Area,Sphericity,Pixels
         1,34.5,0.5,110
         2,18.2,0.6,55
