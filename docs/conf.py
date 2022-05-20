@@ -334,3 +334,11 @@ epub_exclude_files = ['search.html']
 
 # If false, no index is generated.
 #epub_use_index = True
+
+# -- Options for the linkcheck builder ----------------------------------------
+
+# Regular expressions that match URIs that should not be checked when doing a
+# linkcheck build
+linkcheck_ignore = [
+  r'https://your-omero-server.org/*',
+]
