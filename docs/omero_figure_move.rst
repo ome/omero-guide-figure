@@ -64,7 +64,7 @@ This workflow assumes that you have an OMERO.figure already created and want to 
 
 #.  The above means that when you execute the Move into another Group, the Images in your Dataset will no longer be available in the original Group.
 
-#.  Move the Images into the Group you have moved the Figure to. For that, follow `the Move workflow <https://omero-guides.readthedocs.io/en/latest/introduction/docs/data-management.html#move-data-between-groups>`__. This will enable any member of the target Group to view both the Figure and the Images within it.
+#.  Move the Images into the Group you have moved the Figure to. Be sure to select the Images in OMERO.web when moving, not the Dataset. If the Dataset is selected, the Images are left in the original Group, and only the empty Dataset is moved. This is because the Images are linked to the original Dataset which is left in the original Group. Follow `the Move workflow <https://omero-guides.readthedocs.io/en/latest/introduction/docs/data-management.html#move-data-between-groups>`__ to execute the Move. The Move will enable any member of the target Group to view both the Figure and the Images within it.
 
 *Duplicating of Figures and Images into a new Group*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
