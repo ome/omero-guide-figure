@@ -1,7 +1,7 @@
 # User guide for OMERO.figure
 
 [![Documentation Status](https://readthedocs.org/projects/omero-guide-figure/badge/?version=latest)](https://omero-guides.readthedocs.io/en/latest/figure/docs/index.html)
-[![Actions Status](https://github.com/ome/omero-guide-figure/workflows/sphinx/badge.svg)](https://github.com/ome/omero-guide-figure/actions)
+
 
 The documentation is deployed at [How to use OMERO.figure](https://omero-guides.readthedocs.io/en/latest/figure/docs/index.html).
 
