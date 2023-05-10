@@ -147,19 +147,19 @@ a heatmap of colors applied to Shapes on the figure panel.
 
 #.  Alternatively, perform the following steps:
 
-#.  For the Image you wish to use, add some ROIs to the Image. You can see the ROI and Shape IDs in the iviewer ROI table.
+#.  For the Image you wish to use, add some ROIs to the Image. You can see the ROI IDs in the iviewer ROI table.
 
-#.  To setup the OMERO.table, create a CSV file with an ``Roi`` column and a ``Shape`` column containing the corresponding IDs and 1
+#.  To setup the OMERO.table, create a CSV file with an ``Roi`` column containing the corresponding IDs and 1
     or more number columns. The ``#header`` defines the column types: ``l`` (long) for `integers` and ``d`` (double) for `floats`.
     For example:
 
     ::
 
-        # header roi,l,d,d,l
-        Roi,Shape,Area,Sphericity,Pixels
-        1,10,34.5,0.5,110
-        2,11,18.2,0.6,55
-        2,12,44.1,0.9,210
+        # header roi,d,d,l
+        Roi,Area,Sphericity,Pixels
+        1,34.5,0.5,110
+        2,18.2,0.6,55
+        3,44.1,0.9,210
 
 #.  Save the edited csv as ``data.csv``.
 
@@ -176,9 +176,9 @@ a heatmap of colors applied to Shapes on the figure panel.
     OMERO.
 
 #.  View the JavaScript snippet at `figure_table_data_shapes.js <https://github.com/ome/omero-guide-figure/tree/master/scripts/figure_table_data_shapes.js>`_.
-    This uses the ID of each Shape of the panel to query the most recent OMERO.table on the Image using the
-    endpoint: ``/webgateway/table/Image/{imageId}/query/?query=Shape-{shapeId}``, which returns
-    all table rows for that Shape ID. From the JSON returned, we find the column index for the
+    This uses the ID of each Shape of the panel to get the ROI ID and then query the most recent OMERO.table on the Image using the
+    endpoint: ``/webgateway/table/Image/{imageId}/query/?query=Roi-{roiId}``, which returns
+    all table rows for that Roi ID. From the JSON returned, we find the column index for the
     data we want, e.g. ``Sphericity``, and then get the value for that column.
     Once the values for all Shapes on the panel are loaded, the code calculates the range and
     generates a heatmap color for each value in that range. This is set as the color

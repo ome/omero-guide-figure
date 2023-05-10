@@ -32,14 +32,18 @@ async function shapeData(panel) {
     let vals_by_shape = {};
     for (let i = 0; i < shapeIds.length; i++) {
         // Load one at a time - more reliable
+        let shape_id = shapeIds[i];
         let base_url = window.location.href.split("figure")[0];
-        let url = base_url + `webgateway/table/Image/${panel.get('imageId')}/query/?query=Shape-${shapeIds[i]}`;
+        let shape_url = base_url + `api/v0/m/shapes/${shape_id}/`;
+        let shape = await fetch(shape_url).then(rsp => rsp.json());
+        let roi_id = parseInt(shape.data['url:roi'].split("rois/")[1]);
+        console.log("Shape ID", shape_id, "ROI ID", roi_id);
+        let url = base_url + `webgateway/table/Image/${panel.get('imageId')}/query/?query=Roi-${roi_id}`;
         let r = await fetch(url).then(rsp => rsp.json());
         let colIndex = r.data?.columns?.indexOf("Sphericity");
-        let shapeIndex = r.data?.columns?.indexOf("Shape");
-        if (colIndex && shapeIndex && r.data?.rows.length > 0) {
+        if (colIndex && r.data?.rows.length > 0) {
             console.log("Value", r.data.rows[0][colIndex]);
-            vals_by_shape[r.data.rows[0][shapeIndex]] = r.data.rows[0][colIndex];
+            vals_by_shape[shape_id] = r.data.rows[0][colIndex];
         }
     };
     // Once all loaded, we can calculate range and assign colours to shapes
